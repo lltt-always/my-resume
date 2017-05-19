@@ -17,13 +17,13 @@ export default {
   data: function() {
     return {
       fullStyles: [
-        `* {
-          padding: 0;
-          margin: 0;
-        }
-        body {
-          background-color: #f00;
-        }`
+`* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #f00;
+}`
       ],
       currentStyle: '',
       interval: 5,

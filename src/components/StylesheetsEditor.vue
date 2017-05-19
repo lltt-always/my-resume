@@ -1,6 +1,7 @@
 <template>
   <div class="style-editor">
-    {{ code }}
+    <div v-html="stylecode"></div>
+    <pre class="language-css">{{ code }}</pre>
   </div>
 </template>
 
@@ -10,6 +11,11 @@ export default {
   props: [ 'code' ],
   data () {
     return {
+    }
+  },
+  computed: {
+    stylecode: function() {
+      return `<style> ${this.code} </style>`
     }
   }
 }
