@@ -1,28 +1,56 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <stylesheets-editor ref="stylesheetseditor" :code="currentStyle"></stylesheets-editor>
+    <resume-editor ref="resumeeditor"></resume-editor>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import StylesheetsEditor from './components/StylesheetsEditor'
+import ResumeEditor from './components/ResumeEditor'
 
 export default {
   name: 'app',
   components: {
-    Hello
+    StylesheetsEditor, ResumeEditor
+  },
+  data: function() {
+    return {
+      fullStyles: [
+        `* {
+          padding: 0;
+          margin: 0;
+        }
+        body {
+          background-color: #f00;
+        }`
+      ],
+      currentStyle: '',
+      interval: 5,
+    }
+  },
+  mounted: function() {
+    this.showStyle(0);
+  },
+  methods: {
+    showStyle: function(index){
+      let _this = this;
+      let outputStyle = function() {
+        let l = _this.currentStyle ? _this.currentStyle.length : 0;
+        let char = _this.fullStyles[index].substring(l, l+1);
+        if(char == '\n'){}
+        _this.currentStyle +=char;
+        if(char){
+          setTimeout(outputStyle, _this.interval)
+        }
+      };
+      outputStyle()
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
